@@ -1,6 +1,7 @@
 import { MdFileDownloadDone } from "react-icons/md";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import Container from "../components/Container";
 
 const AddPage = ({ setNotes }) => {
   const [inputs, setInputs] = useState({ title: "", body: "" });
@@ -40,29 +41,31 @@ const AddPage = ({ setNotes }) => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler}>
-      <div className="p-6 flex flex-col items-center">
-        <input
-          name="title"
-          type="text"
-          placeholder="Your note's title here"
-          className="w-64 rounded-lg p-4 bg-[#eeeeee] text-black"
-          onChange={onChangeHandler}
-          value={inputs.title}
-        />
-        <input
-          className="w-64 h-96 mt-4 bg-[#eeeeee] text-black p-4 rounded-lg"
-          placeholder="Fill your notes body here..."
-          name="body"
-          type="text"
-          onChange={onChangeHandler}
-          value={inputs.body}
-        />
-      </div>
-      <button type="submit" className="fixed bottom-4 right-4">
-        <MdFileDownloadDone className="text-5xl" />
-      </button>
-    </form>
+    <Container>
+      <form onSubmit={onSubmitHandler}>
+        <div className="p-6 flex flex-col items-center">
+          <input
+            name="title"
+            type="text"
+            placeholder="Your note's title here"
+            className="w-64 rounded-lg p-4 bg-[#eeeeee] text-black"
+            onChange={onChangeHandler}
+            value={inputs.title}
+          />
+          <input
+            className="w-64 h-96 mt-4 bg-[#eeeeee] text-black p-4 rounded-lg"
+            placeholder="Fill your notes body here..."
+            name="body"
+            type="text"
+            onChange={onChangeHandler}
+            value={inputs.body}
+          />
+        </div>
+        <button type="submit" className="fixed bottom-4 right-4">
+          <MdFileDownloadDone className="text-5xl" />
+        </button>
+      </form>
+    </Container>
   );
 };
 

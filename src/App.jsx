@@ -9,17 +9,25 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 
 import { useState } from "react";
-import { getAllNotes } from "./utils/local-data";
+import {
+  getAllNotes,
+  getActiveNotes,
+  getArchivedNotes,
+} from "./utils/local-data";
 
 function App() {
   const [notes, setNotes] = useState(getAllNotes());
+  const actives = notes.filter((note) => note.archived === false);
+  const archiveds = notes.filter((note) => note.archived === true);
+
+  const actives = notes ? notes.getActiveNotes : null;
+  const archiveds = notes ? notes.getArchivedNotes : null;
 
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<ActiveNotes notes={notes} />} />
-        <Route path="/archive" element={<ArchivedNotes notes={notes} />} />
+        <Route path="/" element={<ActiveNotes notes={actives} />} />
+        <Route path="/archive" element={<ArchivedNotes notes={archiveds} />} />
         <Route path="/notes/new" element={<AddPage setNotes={setNotes} />} />
         <Route path="/notes/:id" element={<DetailPage />} />
       </Routes>
