@@ -1,25 +1,28 @@
-const ArchivedNotes = () => {
+import { showFormattedDate } from "../utils";
+import { Link } from "react-router-dom";
+import { getArchivedNotes } from "../utils/local-data";
+
+const ArchivedNotes = ({ notes }) => {
+  const archiveds = notes ? getArchivedNotes(notes) : null;
   return (
     <div className="p-6">
       <h1 className="text-2xl mt-4 font-bold">Archived Notes</h1>
-      <div className="border-2 p-4 rounded-lg mt-4">
-        <h1 className="text-xl font-bold">Babel</h1>
-        <h2 className="text-sm">Kamis, 14 April 2022</h2>
-        <p className="text-base mt-4">
-          Babel merupakan tools open-source yang digunakan untuk mengubah
-          sintaks ECMAScript 2015+ menjadi sintaks yang didukung oleh JavaScript
-          engine versi lama. Babel sering dipakai...
-        </p>
-      </div>
-      <div className="border-2 p-4 rounded-lg mt-4">
-        <h1 className="text-xl font-bold">Babel</h1>
-        <h2 className="text-sm">Kamis, 14 April 2022</h2>
-        <p className="text-base mt-4">
-          Babel merupakan tools open-source yang digunakan untuk mengubah
-          sintaks ECMAScript 2015+ menjadi sintaks yang didukung oleh JavaScript
-          engine versi lama. Babel sering dipakai...
-        </p>
-      </div>
+
+      {archiveds ? (
+        archiveds.map((note) => {
+          return (
+            <div key={note.id} className="border-2 p-6 rounded-lg mt-4">
+              <Link to={`/notes/${note.id}`} className="text-xl font-bold">
+                {note.title}
+              </Link>
+              <h2 className="text-sm">{showFormattedDate(note.createdAt)}</h2>
+              <p className="text-base mt-4">{note.body}</p>
+            </div>
+          );
+        })
+      ) : (
+        <p className="mt-4">No archived notes</p>
+      )}
     </div>
   );
 };

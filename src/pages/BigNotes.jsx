@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { getActiveNotes } from "../utils/local-data";
 
-const ActiveNotes = ({ notes }) => {
+const BigNotes = ({ notes }) => {
   const actives = notes ? getActiveNotes(notes) : null;
   useEffect(() => {
     console.log(actives);
@@ -16,7 +16,7 @@ const ActiveNotes = ({ notes }) => {
       <div className="p-6">
         <h1 className="text-2xl mt-4 font-bold">Active Notes</h1>
 
-        {actives && actives.length ? (
+        {actives ? (
           actives.map((note) => {
             return (
               <div key={note.id} className="border-2 p-6 rounded-lg mt-4">
@@ -36,4 +36,4 @@ const ActiveNotes = ({ notes }) => {
   );
 };
 
-export default ActiveNotes;
+export default BigNotes;
