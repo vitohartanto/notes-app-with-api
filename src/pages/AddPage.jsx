@@ -2,6 +2,7 @@ import { MdFileDownloadDone } from "react-icons/md";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Container from "../components/Container";
+import PropTypes from "prop-types";
 
 const AddPage = ({ setNotes }) => {
   const [inputs, setInputs] = useState({ title: "", body: "" });
@@ -67,6 +68,10 @@ const AddPage = ({ setNotes }) => {
       </form>
     </Container>
   );
+};
+
+AddPage.propTypes = {
+  setNotes: PropTypes.func.isRequired,
 };
 
 export default AddPage;
