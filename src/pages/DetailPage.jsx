@@ -3,6 +3,7 @@ import { showFormattedDate } from "../utils";
 import Container from "../components/Container";
 import ArchiveUnarchiveDeleteButtons from "../components/ArchiveUnarchiveDeleteButtons";
 import PropTypes from "prop-types";
+import parser from "html-react-parser";
 
 const DetailPage = ({ notes, onDelete, onArchive, onUnarchive }) => {
   const { id } = useParams();
@@ -10,10 +11,10 @@ const DetailPage = ({ notes, onDelete, onArchive, onUnarchive }) => {
 
   return (
     <Container>
-      <div className="p-8  rounded-lg">
-        <h1 className="mt-2 text-3xl font-bold">{note.title}</h1>
-        <h2 className="mb-6">{showFormattedDate(note.createdAt)}</h2>
-        <p className="text-lg">{note.body}</p>
+      <div className="px-8 py-10 md:px-10 md:py-16 lg:px-20 xl:px-32 xl:py-24 rounded-lg">
+        <h1 className="mt-2 text-5xl font-bold">{note.title}</h1>
+        <h2 className="mb-6 xl:text-lg">{showFormattedDate(note.createdAt)}</h2>
+        <p className="text-lg xl:text-xl">{parser(note.body)}</p>
       </div>
       <ArchiveUnarchiveDeleteButtons
         id={id}

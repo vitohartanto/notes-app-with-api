@@ -28,7 +28,7 @@ const ArchiveUnarchiveDeleteButtons = ({
     navigate("/");
   };
   return (
-    <div className="flex items-center fixed bottom-4 right-4">
+    <div className="flex items-center fixed bottom-4 right-4 lg:bottom-8 lg:right-8">
       <button
         className="m-2"
         onClick={
@@ -36,13 +36,13 @@ const ArchiveUnarchiveDeleteButtons = ({
         }
       >
         {note.archived ? (
-          <MdUnarchive className="text-4xl" />
+          <MdUnarchive className="text-4xl sm:text-5xl" />
         ) : (
-          <IoArchive className="text-4xl" />
+          <IoArchive className="text-4xl sm:text-5xl" />
         )}
       </button>
       <button className="m-2" onClick={onDetailDeleteHandler}>
-        <MdDelete className="text-5xl" />
+        <MdDelete className="text-5xl sm:text-6xl" />
       </button>
     </div>
   );

@@ -5,26 +5,30 @@ import Container from "../components/Container";
 import PropTypes from "prop-types";
 
 const AddPage = ({ setNotes }) => {
-  const [inputs, setInputs] = useState({ title: "", body: "" });
+  const [inputTitle, setInputTitle] = useState("");
+  const [inputBody, setInputBody] = useState("");
   const navigate = useNavigate();
 
-  const onChangeHandler = (event) => {
-    const { name, value } = event.target;
+  const onTitleChangeHandler = (event) => {
+    const { value } = event.target;
 
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
+    setInputTitle(value);
+  };
+
+  const onBodyChangeHandler = (event) => {
+    const { innerHTML } = event.target;
+    setInputBody(innerHTML);
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
-    console.log("Inputs before creating new note:", inputs);
+    console.log("Inputs before creating new note:", inputTitle, inputBody);
 
     const newNote = {
       id: `notes-${+new Date()}`,
-      ...inputs,
+      title: inputTitle,
+      body: inputBody,
       archived: false,
       createdAt: new Date().toISOString(),
     };
@@ -38,28 +42,30 @@ const AddPage = ({ setNotes }) => {
     navigate("/");
 
     // Reset input fields after adding a note
-    setInputs({ title: "", body: "" });
+    setInputTitle("");
+    setInputBody("");
   };
 
   return (
     <Container>
       <form onSubmit={onSubmitHandler}>
-        <div className="p-6 flex flex-col items-center">
+        <div className="px-8 py-6 md:px-14 lg:px-20 xl:px-32 flex flex-col items-center">
           <input
             name="title"
             type="text"
-            placeholder="Your note's title here"
-            className="w-64 rounded-lg p-4 bg-[#eeeeee] text-black"
-            onChange={onChangeHandler}
-            value={inputs.title}
+            placeholder="Please provide the title of your note."
+            className="w-full mt-4 rounded-lg p-4 bg-transparent border-2"
+            onChange={onTitleChangeHandler}
+            value={inputTitle}
           />
-          <input
-            className="w-64 h-96 mt-4 bg-[#eeeeee] text-black p-4 rounded-lg"
-            placeholder="Fill your notes body here..."
+          <div
+            className="w-full h-96 mt-4 bg-transparent border-2 p-4 rounded-lg text-[#848d87]"
+            data-text="Please enter your note's content here, with support for rich text formatting such as bold, italic, underline, and more."
             name="body"
             type="text"
-            onChange={onChangeHandler}
-            value={inputs.body}
+            onInput={onBodyChangeHandler}
+            value={inputBody}
+            contentEditable
           />
         </div>
         <button type="submit" className="fixed bottom-4 right-4">

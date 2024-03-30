@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 const Navbar = ({ search, setSearch, setSearchParams }) => {
   return (
-    <div className="flex justify-between items-center border-b-2 px-2 py-4">
+    <div className="flex justify-between items-center border-b-2 px-4 py-4 sm:px-8">
       <Link to="/">
         <FaHome className="text-5xl" />
       </Link>

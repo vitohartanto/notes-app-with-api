@@ -5,12 +5,18 @@ import Container from "../components/Container";
 const Page404 = () => {
   return (
     <Container>
-      <div className="flex flex-col justify-center items-center h-screen mt-[-75px]">
+      <div className="flex flex-col justify-center items-center h-screen mt-[-80px] p-8">
         <IoLogoIonitron className="text-9xl" />
-        <h1 className="text-5xl font-bold">404</h1>
-        <h2>Page Not Found</h2>
-        <h2>The page you are looking for does not exist.</h2>
-        <Link to="/">Back to Home</Link>
+        <h1 className="text-5xl font-bold mt-4">404</h1>
+        <h2 className="mt-4 md:text-lg font-medium">Page Not Found</h2>
+        <h2 className="text-center mt-4 md:text-lg">
+          The page you are looking for does not exist.
+        </h2>
+        <Link to="/">
+          <div className="mt-4 border-2 px-4 py-2 rounded-lg font-semibold">
+            Back to Home
+          </div>
+        </Link>
       </div>
     </Container>
   );
