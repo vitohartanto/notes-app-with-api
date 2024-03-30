@@ -23,9 +23,9 @@ const Navbar = ({ search, setSearch, setSearchParams }) => {
 };
 
 Navbar.propTypes = {
-  search: PropTypes.string.isRequired,
-  setSearch: PropTypes.func.isRequired,
-  setSearchParams: PropTypes.func.isRequired,
+  search: PropTypes.string,
+  setSearch: PropTypes.func,
+  setSearchParams: PropTypes.func,
 };
 
 export default Navbar;

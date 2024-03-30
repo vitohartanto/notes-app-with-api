@@ -15,9 +15,9 @@ const Container = ({ search, setSearch, setSearchParams, children }) => {
 };
 
 Container.propTypes = {
-  search: PropTypes.string.isRequired,
-  setSearch: PropTypes.func.isRequired,
-  setSearchParams: PropTypes.func.isRequired,
+  search: PropTypes.string,
+  setSearch: PropTypes.func,
+  setSearchParams: PropTypes.func,
   children: PropTypes.node.isRequired,
 };
 

@@ -19,9 +19,9 @@ const SearchBar = ({ search, setSearch, setSearchParams }) => {
 };
 
 SearchBar.propTypes = {
-  search: PropTypes.string.isRequired,
-  setSearch: PropTypes.func.isRequired,
-  setSearchParams: PropTypes.func.isRequired,
+  search: PropTypes.string,
+  setSearch: PropTypes.func,
+  setSearchParams: PropTypes.func,
 };
 
 export default SearchBar;
