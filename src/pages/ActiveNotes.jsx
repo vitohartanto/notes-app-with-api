@@ -8,7 +8,7 @@ import { useState } from "react";
 import parser from "html-react-parser";
 import SearchBar from "../components/SearchBar";
 
-const ActiveNotes = ({ notes }) => {
+const ActiveNotes = ({ notes, name, logout }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState(searchParams.get("title") || "");
 
@@ -17,11 +17,7 @@ const ActiveNotes = ({ notes }) => {
   );
   // min-w-[302px] sm:max-w-[302px] h-64
   return (
-    <Container
-      search={search}
-      setSearch={setSearch}
-      setSearchParams={setSearchParams}
-    >
+    <Container name={name} logout={logout}>
       <AddPageButton />
       <div className="p-6 md:px-10 lg:px-20 xl:px-32">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl my-4 xl:my-5 font-bold">

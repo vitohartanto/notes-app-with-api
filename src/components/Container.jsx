@@ -1,19 +1,18 @@
 import Navbar from "./Navbar";
 import PropTypes from "prop-types";
 
-const Container = ({ children }) => {
+const Container = ({ logout, name, children }) => {
   return (
     <div>
-      <Navbar />
+      <Navbar name={name} logout={logout} />
       {children}
     </div>
   );
 };
 
 Container.propTypes = {
-  search: PropTypes.string,
-  setSearch: PropTypes.func,
-  setSearchParams: PropTypes.func,
+  logout: PropTypes.func,
+  name: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 
