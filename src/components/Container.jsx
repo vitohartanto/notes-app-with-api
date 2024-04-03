@@ -1,14 +1,10 @@
 import Navbar from "./Navbar";
 import PropTypes from "prop-types";
 
-const Container = ({ search, setSearch, setSearchParams, children }) => {
+const Container = ({ children }) => {
   return (
     <div>
-      <Navbar
-        search={search}
-        setSearch={setSearch}
-        setSearchParams={setSearchParams}
-      />
+      <Navbar />
       {children}
     </div>
   );

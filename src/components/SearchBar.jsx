@@ -10,7 +10,7 @@ const SearchBar = ({ search, setSearch, setSearchParams }) => {
       <input
         type="text"
         placeholder="Find by title"
-        className="rounded-2xl p-3 text-black sm:w-80 lg:w-96 sm:px-4"
+        className="rounded-2xl p-3 text-black w-full  sm:px-4 mb-6"
         onChange={onChangeHandler}
         value={search}
       />

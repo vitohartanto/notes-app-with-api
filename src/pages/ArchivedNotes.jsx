@@ -6,6 +6,7 @@ import { FaPeoplePulling } from "react-icons/fa6";
 import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import parser from "html-react-parser";
+import SearchBar from "../components/SearchBar";
 
 const ArchivedNotes = ({ notes }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -24,6 +25,11 @@ const ArchivedNotes = ({ notes }) => {
         <h1 className="text-2xl sm:text-3xl lg:text-4xl my-4 xl:my-5 font-bold">
           Archived Notes
         </h1>
+        <SearchBar
+          search={search}
+          setSearch={setSearch}
+          setSearchParams={setSearchParams}
+        />
 
         <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filteredNotes && filteredNotes.length ? (
