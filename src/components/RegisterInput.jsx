@@ -1,47 +1,67 @@
 import useInput from "../hooks/useInput";
+import { useContext } from "react";
+import LanguageContext from "../contexts/LanguageContext";
+import { useNavigate } from "react-router";
 
 const RegisterInput = ({ register }) => {
+  const navigate = useNavigate();
+  const { language } = useContext(LanguageContext);
   const [name, onNameChangeHandler] = useInput("");
   const [email, onEmailChangeHandler] = useInput("");
   const [password, onPasswordChangeHandler] = useInput("");
+  const [confirmPassword, onConfirmPasswordChangeHandler] = useInput("");
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    register({
-      name,
-      email,
-      password,
-    });
+    if (password === confirmPassword) {
+      register({
+        name,
+        email,
+        password,
+      });
+
+      navigate("/");
+    } else {
+      alert("Passwords do not match");
+    }
   };
   return (
     <form className="flex flex-col" onSubmit={onSubmitHandler}>
       <input
         type="text"
-        className="rounded-lg px-4 py-2 text-black mb-4"
-        placeholder="Username"
+        className="border-2 note-card rounded-lg px-4 py-2 text-black mb-4"
+        placeholder={language === "en" ? "Username" : "Nama panggilan"}
         value={name}
         onChange={onNameChangeHandler}
       />
       <input
         type="email"
-        className="rounded-lg px-4 py-2 text-black mb-4"
+        className="border-2 note-card rounded-lg px-4 py-2 text-black mb-4"
         placeholder="Email"
         value={email}
         onChange={onEmailChangeHandler}
       />
       <input
         type="password"
-        className="rounded-lg px-4 py-2 text-black mb-4"
-        placeholder="Password"
+        className="border-2 note-card rounded-lg px-4 py-2 text-black mb-4"
+        placeholder={language === "en" ? "Password" : "Kata sandi"}
         autoComplete="current-password"
         value={password}
         onChange={onPasswordChangeHandler}
       />
-      {/* <input
+      <input
         type="password"
-        className="rounded-lg px-4 py-2 text-black mb-4"
-        placeholder="Confirm Password"
-      /> */}
-      <button className="border-2 rounded-lg py-2">Register</button>
+        className="border-2 note-card rounded-lg px-4 py-2 text-black mb-4"
+        placeholder={
+          language === "en" ? "Confirm Password" : "Konfirmasi kata sandi"
+        }
+        autoComplete="current-password"
+        value={confirmPassword}
+        onChange={onConfirmPasswordChangeHandler}
+      />
+      <button className="note-card border-2 rounded-lg py-2">
+        {language === "en" ? "Register" : "Daftar"}
+      </button>
     </form>
   );
 };

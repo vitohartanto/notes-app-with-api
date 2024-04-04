@@ -1,4 +1,4 @@
-import { showFormattedDate } from "../utils";
+import { showFormattedDateIndo, showFormattedDateUSA } from "../utils";
 import { Link } from "react-router-dom";
 import Container from "../components/Container";
 import { useState, useEffect } from "react";
@@ -9,12 +9,15 @@ import parser from "html-react-parser";
 import SearchBar from "../components/SearchBar";
 import { getArchivedNotes } from "../utils/network-data";
 import LoadingPage from "./LoadingPage";
+import { useContext } from "react";
+import LanguageContext from "../contexts/LanguageContext";
 
 const ArchivedNotes = ({ name, logout }) => {
   const [archivedNotes, setArchivedNotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState(searchParams.get("title") || "");
+  const { language } = useContext(LanguageContext);
 
   useEffect(() => {
     const fetchArchivedNotes = async () => {
@@ -40,7 +43,7 @@ const ArchivedNotes = ({ name, logout }) => {
       {!loading && (
         <div className="p-6 md:px-10 lg:px-20 xl:px-32">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl my-4 xl:my-5 font-bold">
-            Archived Notes
+            {language === "en" ? "Archived Notes" : "Catatan Diarsip"}
           </h1>
           <SearchBar
             search={search}
@@ -58,7 +61,9 @@ const ArchivedNotes = ({ name, logout }) => {
                         {note.title}
                       </h1>
                       <h2 className="text-sm lg:text-base lg:mt-1">
-                        {showFormattedDate(note.createdAt)}
+                        {language === "en"
+                          ? showFormattedDateUSA(note.createdAt)
+                          : showFormattedDateIndo(note.createdAt)}
                       </h2>
                       <p className="text-base lg:text-lg mt-4 break-words hyphens-auto line-clamp-5">
                         {parser(note.body)}

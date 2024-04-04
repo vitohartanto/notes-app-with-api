@@ -5,8 +5,11 @@ import Container from "../components/Container";
 import PropTypes from "prop-types";
 import { addNote } from "../utils/network-data";
 import useInput from "../hooks/useInput";
+import { useContext } from "react";
+import LanguageContext from "../contexts/LanguageContext";
 
 const AddPage = ({ logout, name }) => {
+  const { language } = useContext(LanguageContext);
   const [inputTitle, onTitleChangeHandler] = useInput("");
   const [inputBody, setInputBody] = useState("");
   const navigate = useNavigate();
@@ -34,7 +37,11 @@ const AddPage = ({ logout, name }) => {
             id="input-title"
             name="title"
             type="text"
-            placeholder="Please provide the title of your note."
+            placeholder={
+              language === "en"
+                ? "Please provide the title of your note."
+                : "Isikan judul catatan Anda"
+            }
             className="w-full mt-4 rounded-lg p-4 bg-transparent border-2"
             onChange={onTitleChangeHandler}
             value={inputTitle}
@@ -42,7 +49,11 @@ const AddPage = ({ logout, name }) => {
           <div
             id="input-body"
             className="w-full h-96 mt-4 bg-transparent border-2 p-4 rounded-lg text-[#848d87]"
-            data-text="Please enter your note's content here, with support for rich text formatting such as bold, italic, underline, and more."
+            data-text={
+              language === "en"
+                ? "Please enter your note's content here, with support for rich text formatting such as bold, italic, underline, and more."
+                : "Silakan masukkan konten catatan Anda di sini, dilengkapi dengan dukungan untuk format rich text seperti huruf tebal, huruf miring, garis bawah, dan banyak lagi."
+            }
             name="body"
             type="text"
             onInput={onBodyChangeHandler}

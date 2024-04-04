@@ -1,4 +1,4 @@
-const showFormattedDate = (date) => {
+const showFormattedDateIndo = (date) => {
   const options = {
     weekday: "long",
     year: "numeric",
@@ -8,4 +8,14 @@ const showFormattedDate = (date) => {
   return new Date(date).toLocaleDateString("id-ID", options);
 };
 
-export { showFormattedDate };
+const showFormattedDateUSA = (date) => {
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  return new Date(date).toLocaleDateString("en-US", options);
+};
+
+export { showFormattedDateIndo, showFormattedDateUSA };

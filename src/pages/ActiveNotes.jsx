@@ -1,20 +1,22 @@
-import { showFormattedDate } from "../utils";
+import { showFormattedDateIndo, showFormattedDateUSA } from "../utils";
 import AddPageButton from "../components/AddPageButton";
 import { Link, useSearchParams } from "react-router-dom";
 import { FaPeopleRobbery } from "react-icons/fa6";
 import Container from "../components/Container";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import parser from "html-react-parser";
 import SearchBar from "../components/SearchBar";
 import { getActiveNotes } from "../utils/network-data";
 import LoadingPage from "./LoadingPage";
+import LanguageContext from "../contexts/LanguageContext";
 
 const ActiveNotes = ({ name, logout }) => {
   const [activeNotes, setActiveNotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState(searchParams.get("title") || "");
+  const { language } = useContext(LanguageContext);
 
   useEffect(() => {
     const fetchActiveNotes = async () => {
@@ -43,7 +45,7 @@ const ActiveNotes = ({ name, logout }) => {
           <AddPageButton />
           <div className="p-6 md:px-10 lg:px-20 xl:px-32">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl my-4 xl:my-5 font-bold">
-              Active Notes
+              {language === "en" ? "Active Notes" : "Catatan Aktif"}
             </h1>
 
             <SearchBar
@@ -62,7 +64,9 @@ const ActiveNotes = ({ name, logout }) => {
                           {note.title}
                         </h1>
                         <h2 className="text-sm lg:text-base lg:mt-1">
-                          {showFormattedDate(note.createdAt)}
+                          {language === "en"
+                            ? showFormattedDateUSA(note.createdAt)
+                            : showFormattedDateIndo(note.createdAt)}
                         </h2>
                         <p className="text-base lg:text-lg mt-4 break-words hyphens-auto line-clamp-5">
                           {parser(note.body)}
