@@ -1,23 +1,38 @@
-import "./styles/App.css";
-
 import ActiveNotes from "./pages/ActiveNotes";
 import ArchivedNotes from "./pages/ArchivedNotes";
 import AddPage from "./pages/AddPage";
 import DetailPage from "./pages/DetailPage";
 
-import { BrowserRouter, useNavigate } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import Page404 from "./pages/Page404";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import { getUserLogged, putAccessToken } from "./utils/network-data";
+import ThemeContext from "./contexts/ThemeContext";
 
 function App() {
   const [authedUser, setAuthedUser] = useState(null);
   const [initializing, setInitializing] = useState(true);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === "light" ? "dark" : "light";
+      localStorage.setItem("theme", newTheme);
+      return newTheme;
+    });
+  };
+
+  const themeContextValue = useMemo(() => {
+    return {
+      theme,
+      toggleTheme,
+    };
+  }, [theme]);
 
   const onLoginSuccess = async ({ accessToken }) => {
     putAccessToken(accessToken);
@@ -32,6 +47,10 @@ function App() {
   };
 
   useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       const { data } = await getUserLogged();
       setAuthedUser(data);
@@ -41,71 +60,54 @@ function App() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
   if (initializing) {
     return null;
   }
 
-  // PEMBATAS
-
-  // const actives = notes.filter((note) => note.archived === false);
-  // const archiveds = notes.filter((note) => note.archived === true);
-
-  // const onDeleteHandler = (noteId) => {
-  //   const notDeletedNotes = notes.filter((note) => note.id !== noteId);
-  //   setNotes(notDeletedNotes);
-  // };
-
-  // const onArchiveHandler = (noteId) => {
-  //   const updatedNotes = notes.map((note) => {
-  //     if (note.id === noteId) {
-  //       return { ...note, archived: true };
-  //     }
-  //     return note;
-  //   });
-  //   setNotes([...updatedNotes]);
-  // };
-
-  // const onUnarchiveHandler = (noteId) => {
-  //   const updatedNotes = notes.map((note) => {
-  //     if (note.id === noteId) {
-  //       return { ...note, archived: false };
-  //     }
-  //     return note;
-  //   });
-  //   setNotes([...updatedNotes]);
-  // };
-
   if (authedUser == null) {
     return (
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/*"
-            element={<LoginPage loginSuccess={onLoginSuccess} />}
-          />
-          <Route path="/register" element={<RegisterPage />} />
-        </Routes>
-      </BrowserRouter>
+      <ThemeContext.Provider value={themeContextValue}>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/*"
+              element={<LoginPage loginSuccess={onLoginSuccess} />}
+            />
+            <Route path="/register" element={<RegisterPage />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeContext.Provider>
     );
   }
 
-  // PEMBATAS
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<ActiveNotes name={authedUser.name} logout={onLogout} />}
-        />
-        <Route
-          path="/archive"
-          element={<ArchivedNotes name={authedUser.name} logout={onLogout} />}
-        />
-        <Route path="/notes/new" element={<AddPage />} />
-        <Route path="/notes/:id" element={<DetailPage />} />
-        <Route path="*" element={<Page404 />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeContext.Provider value={themeContextValue}>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<ActiveNotes name={authedUser.name} logout={onLogout} />}
+          />
+          <Route
+            path="/archive"
+            element={<ArchivedNotes name={authedUser.name} logout={onLogout} />}
+          />
+          <Route
+            path="/notes/new"
+            element={<AddPage name={authedUser.name} logout={onLogout} />}
+          />
+          <Route
+            path="/notes/:id"
+            element={<DetailPage name={authedUser.name} logout={onLogout} />}
+          />
+          <Route path="*" element={<Page404 />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeContext.Provider>
   );
 }
 

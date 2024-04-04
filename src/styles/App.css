@@ -1,11 +1,34 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
+:root {
+  --font-color: #222831;
+  --background-color: #ececec;
+}
+
 body {
-  background-color: #222831;
-  color: #eeeeee;
+  background-color: var(--background-color);
+  color: var(--font-color);
   font-family: "Montserrat";
 }
 
 [contentEditable="true"]:empty:not(:focus):before {
   content: attr(data-text);
+}
+
+[data-theme="dark"] {
+  --font-color: #eee;
+  --background-color: #222831;
+}
+
+#navbar,
+.note-card,
+#input-title,
+#input-body,
+#searchbar {
+  border-color: var(--font-color);
+}
+
+#add-page-button {
+  background-color: var(--background-color);
+  border-color: var(--font-color);
 }

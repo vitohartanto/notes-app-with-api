@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LoadingPage from "./LoadingPage";
 
-const DetailPage = () => {
+const DetailPage = ({ name, logout }) => {
   const [note, setNote] = useState({});
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
@@ -65,13 +65,13 @@ const DetailPage = () => {
   };
 
   return (
-    <Container>
+    <Container name={name} logout={logout}>
       {loading && <LoadingPage />}
       {!loading && (
         <div>
           <div className="px-8 py-10 md:px-10 md:py-16 lg:px-20 xl:px-32 xl:py-24 rounded-lg">
             <h1 className="mt-2 text-5xl font-bold">{note.title}</h1>
-            <h2 className="mb-6 xl:text-lg">
+            <h2 className="mt-4 mb-6 xl:text-lg">
               {showFormattedDate(note.createdAt)}
             </h2>
             <p className="text-lg xl:text-xl">{parser(note.body)}</p>

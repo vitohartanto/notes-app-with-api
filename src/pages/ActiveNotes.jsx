@@ -57,7 +57,7 @@ const ActiveNotes = ({ name, logout }) => {
                 filteredNotes.map((note) => {
                   return (
                     <Link to={`/notes/${note.id}`} key={note.id}>
-                      <div className="border-2 p-6 rounded-lg h-64 sm:h-[270px] lg:h-[300px]">
+                      <div className="note-card border-2  p-6 rounded-lg h-64 sm:h-[270px] lg:h-[300px]">
                         <h1 className="text-2xl lg:text-2xl font-bold">
                           {note.title}
                         </h1>
