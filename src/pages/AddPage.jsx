@@ -3,48 +3,54 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import Container from "../components/Container";
 import PropTypes from "prop-types";
+import { addNote } from "../utils/network-data";
+import useInput from "../hooks/useInput";
 
 const AddPage = ({ setNotes }) => {
-  const [inputTitle, setInputTitle] = useState("");
+  const [inputTitle, onTitleChangeHandler] = useInput("");
   const [inputBody, setInputBody] = useState("");
   const navigate = useNavigate();
-
-  const onTitleChangeHandler = (event) => {
-    const { value } = event.target;
-
-    setInputTitle(value);
-  };
 
   const onBodyChangeHandler = (event) => {
     const { innerHTML } = event.target;
     setInputBody(innerHTML);
   };
 
+  const onAddNoteHandler = async (note) => {
+    await addNote(note);
+    navigate("/");
+  };
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
-
-    console.log("Inputs before creating new note:", inputTitle, inputBody);
-
-    const newNote = {
-      id: `notes-${+new Date()}`,
-      title: inputTitle,
-      body: inputBody,
-      archived: false,
-      createdAt: new Date().toISOString(),
-    };
-
-    console.log("New note:", newNote);
-
-    setNotes((prevNotes) => {
-      return [...prevNotes, newNote];
-    });
-
-    navigate("/");
-
-    // Reset input fields after adding a note
-    setInputTitle("");
-    setInputBody("");
+    onAddNoteHandler({ title: inputTitle, body: inputBody });
   };
+
+  // const onSubmitHandler = (event) => {
+  //   event.preventDefault();
+
+  //   console.log("Inputs before creating new note:", inputTitle, inputBody);
+
+  //   const newNote = {
+  //     id: `notes-${+new Date()}`,
+  //     title: inputTitle,
+  //     body: inputBody,
+  //     archived: false,
+  //     createdAt: new Date().toISOString(),
+  //   };
+
+  //   console.log("New note:", newNote);
+
+  //   setNotes((prevNotes) => {
+  //     return [...prevNotes, newNote];
+  //   });
+
+  //   navigate("/");
+
+  //   // Reset input fields after adding a note
+  //   setInputTitle("");
+  //   setInputBody("");
+  // };
 
   return (
     <Container>
@@ -76,8 +82,8 @@ const AddPage = ({ setNotes }) => {
   );
 };
 
-AddPage.propTypes = {
-  setNotes: PropTypes.func.isRequired,
-};
+// AddPage.propTypes = {
+//   setNotes: PropTypes.func.isRequired,
+// };
 
 export default AddPage;
