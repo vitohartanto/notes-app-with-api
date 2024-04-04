@@ -18,7 +18,7 @@ const LoginPage = ({ loginSuccess }) => {
   return (
     <Container>
       <div className="h-screen flex flex-col justify-center mt-[-40px]">
-        <div className="border-2 note-card shadow-[1px_-1px_4px_8px_rgba(255,255,255,0.78)] mx-8 rounded-lg p-6 ">
+        <div className="border-2 note-card shadow-[1px_-1px_4px_8px_rgba(255,255,255,0.78)] sm:w-96 xl:w-[420px] sm:mx-auto mx-8 rounded-lg p-6 ">
           <h1 className="text-2xl font-bold mb-4">
             {language === "en" ? "Login" : "Masuk"}
           </h1>

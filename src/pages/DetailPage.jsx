@@ -56,14 +56,12 @@ const DetailPage = ({ name, logout }) => {
       if (!error) {
         navigate("/");
       }
-      console.log("Error while archieving note!");
     } else {
       const { error } = await unarchiveNote(id);
 
       if (!error) {
         navigate("/");
       }
-      console.log("Error while unarchieving note!");
     }
   };
 
