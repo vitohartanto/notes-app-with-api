@@ -2,6 +2,7 @@ import useInput from "../hooks/useInput";
 import { useContext } from "react";
 import LanguageContext from "../contexts/LanguageContext";
 import { useNavigate } from "react-router";
+import PropTypes from "prop-types";
 
 const RegisterInput = ({ register }) => {
   const navigate = useNavigate();
@@ -64,6 +65,10 @@ const RegisterInput = ({ register }) => {
       </button>
     </form>
   );
+};
+
+RegisterInput.propTypes = {
+  register: PropTypes.func,
 };
 
 export default RegisterInput;

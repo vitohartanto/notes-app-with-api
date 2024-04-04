@@ -91,16 +91,9 @@ const ActiveNotes = ({ name, logout }) => {
   );
 };
 
-// ActiveNotes.propTypes = {
-//   notes: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       title: PropTypes.string.isRequired,
-//       body: PropTypes.string.isRequired,
-//       archived: PropTypes.bool.isRequired,
-//       createdAt: PropTypes.string.isRequired,
-//     })
-//   ),
-// };
+ActiveNotes.propTypes = {
+  logout: PropTypes.func,
+  name: PropTypes.string,
+};
 
 export default ActiveNotes;

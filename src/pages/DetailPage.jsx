@@ -93,19 +93,9 @@ const DetailPage = ({ name, logout }) => {
   );
 };
 
-// DetailPage.propTypes = {
-//   notes: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       title: PropTypes.string.isRequired,
-//       body: PropTypes.string.isRequired,
-//       archived: PropTypes.bool.isRequired,
-//       createdAt: PropTypes.string.isRequired,
-//     })
-//   ).isRequired,
-//   onDelete: PropTypes.func.isRequired,
-//   onArchive: PropTypes.func.isRequired,
-//   onUnarchive: PropTypes.func.isRequired,
-// };
+DetailPage.propTypes = {
+  logout: PropTypes.func,
+  name: PropTypes.string,
+};
 
 export default DetailPage;

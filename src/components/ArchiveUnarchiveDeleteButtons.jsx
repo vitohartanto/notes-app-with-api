@@ -1,14 +1,9 @@
 import { IoArchive } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { MdUnarchive } from "react-icons/md";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
-const ArchiveUnarchiveDeleteButtons = ({
-  id,
-  onDelete,
-  archiveToggler,
-  note,
-}) => {
+const ArchiveUnarchiveDeleteButtons = ({ onDelete, archiveToggler, note }) => {
   return (
     <div className="flex items-center fixed bottom-4 right-4 lg:bottom-8 lg:right-8">
       <button className="m-2" onClick={() => archiveToggler(note.id)}>
@@ -25,18 +20,17 @@ const ArchiveUnarchiveDeleteButtons = ({
   );
 };
 
-// ArchiveUnarchiveDeleteButtons.propTypes = {
-//   id: PropTypes.string.isRequired,
-//   onDelete: PropTypes.func.isRequired,
-//   onArchive: PropTypes.func.isRequired,
-//   onUnarchive: PropTypes.func.isRequired,
-//   note: PropTypes.shape({
-//     id: PropTypes.string.isRequired,
-//     title: PropTypes.string.isRequired,
-//     body: PropTypes.string.isRequired,
-//     archived: PropTypes.bool.isRequired,
-//     createdAt: PropTypes.string.isRequired,
-//   }).isRequired,
-// };
+ArchiveUnarchiveDeleteButtons.propTypes = {
+  onDelete: PropTypes.func.isRequired,
+  archiveToggler: PropTypes.func.isRequired,
+  note: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    archived: PropTypes.bool.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    owner: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default ArchiveUnarchiveDeleteButtons;

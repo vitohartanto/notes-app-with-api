@@ -69,8 +69,9 @@ const AddPage = ({ logout, name }) => {
   );
 };
 
-// AddPage.propTypes = {
-//   setNotes: PropTypes.func.isRequired,
-// };
+AddPage.propTypes = {
+  logout: PropTypes.func,
+  name: PropTypes.string,
+};
 
 export default AddPage;

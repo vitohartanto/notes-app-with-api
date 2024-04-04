@@ -1,6 +1,7 @@
 import useInput from "../hooks/useInput";
 import { useContext } from "react";
 import LanguageContext from "../contexts/LanguageContext";
+import PropTypes from "prop-types";
 
 const LoginInput = ({ login }) => {
   const { language } = useContext(LanguageContext);
@@ -36,6 +37,10 @@ const LoginInput = ({ login }) => {
       </button>
     </form>
   );
+};
+
+LoginInput.propTypes = {
+  login: PropTypes.func.isRequired,
 };
 
 export default LoginInput;

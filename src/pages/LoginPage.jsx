@@ -4,6 +4,7 @@ import LoginInput from "../components/LoginInput";
 import { login } from "../utils/network-data";
 import { useContext } from "react";
 import LanguageContext from "../contexts/LanguageContext";
+import PropTypes from "prop-types";
 
 const LoginPage = ({ loginSuccess }) => {
   const { language } = useContext(LanguageContext);
@@ -48,6 +49,10 @@ const LoginPage = ({ loginSuccess }) => {
       </div>
     </Container>
   );
+};
+
+LoginPage.propTypes = {
+  loginSuccess: PropTypes.func,
 };
 
 export default LoginPage;

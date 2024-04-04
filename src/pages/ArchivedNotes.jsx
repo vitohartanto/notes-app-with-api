@@ -87,16 +87,9 @@ const ArchivedNotes = ({ name, logout }) => {
   );
 };
 
-// ArchivedNotes.propTypes = {
-//   notes: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       title: PropTypes.string.isRequired,
-//       body: PropTypes.string.isRequired,
-//       archived: PropTypes.bool.isRequired,
-//       createdAt: PropTypes.string.isRequired,
-//     })
-//   ).isRequired,
-// };
+ArchivedNotes.propTypes = {
+  logout: PropTypes.func,
+  name: PropTypes.string,
+};
 
 export default ArchivedNotes;

@@ -6,6 +6,7 @@ import ThemeToggle from "./ThemeToggle";
 import LanguageToggle from "./LanguageToggle";
 import { useContext } from "react";
 import AuthedUserContext from "../contexts/AuthedUserContext";
+import PropTypes from "prop-types";
 
 const Navbar = ({ logout, name }) => {
   const authedUser = useContext(AuthedUserContext);
@@ -41,6 +42,11 @@ const Navbar = ({ logout, name }) => {
       )}
     </div>
   );
+};
+
+Navbar.propTypes = {
+  logout: PropTypes.func,
+  name: PropTypes.string,
 };
 
 export default Navbar;
